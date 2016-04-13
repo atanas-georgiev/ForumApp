@@ -1,5 +1,6 @@
 ﻿namespace ForumApp.Mvc
 {
+    using System.Reflection;
     using System.Web.Mvc;
     using System.Web.Optimization;
     using System.Web.Routing;
@@ -18,6 +19,9 @@
             DatabaseConfig.Initialize();
 
             AutofacConfig.RegisterAutofac();
+
+            var autoMapperConfig = new AutoMapperConfig();
+            autoMapperConfig.Execute(Assembly.GetExecutingAssembly());
         }
     }
 }

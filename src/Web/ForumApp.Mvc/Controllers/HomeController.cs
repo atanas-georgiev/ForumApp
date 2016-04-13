@@ -2,6 +2,8 @@
 {
     using System.Web.Mvc;
 
+    using ForumApp.Mvc.Infrastructure.Mappings;
+    using ForumApp.Mvc.Models.Forum;
     using ForumApp.Services.Forum;
 
     public class HomeController : Controller
@@ -15,7 +17,8 @@
 
         public ActionResult Index()
         {
-            return View();
+            var forums = this.forumService.GetAll().To<ForumListViewModel>();
+            return View(forums);
         }
 
         public ActionResult About()
