@@ -6,19 +6,11 @@ namespace ForumApp.Data
 {
     public interface IForumAppDbContext
     {
-          IDbSet<Forum> Forums { get; set; }
-//
-//        IDbSet<Article> Articles { get; set; }
-//
-//        IDbSet<Like> Likes { get; set; }
-//
-//        IDbSet<Comment> Comments { get; set; }
-//
-//        IDbSet<Category> Categories { get; set; }
-//
-//        IDbSet<Tag> Tags { get; set; }
-//
-//        IDbSet<Alert> Alerts { get; set; }
+        IDbSet<Forum> Forums { get; set; }
+
+        IDbSet<Post> Posts { get; set; }
+
+        IDbSet<Comment> Comments { get; set; }
 
         DbSet<TEntity> Set<TEntity>() where TEntity : class;
 

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{F38024C1-60BC-477E-A8B7-25783B92420C}"
 EndProject
@@ -16,6 +16,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForumApp.Data", "Data\ForumApp.Data\ForumApp.Data.csproj", "{65D494F0-5DE1-4FCB-91B3-60FF1117D7BD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForumApp.Data.Models", "Data\ForumApp.Data.Models\ForumApp.Data.Models.csproj", "{AC90A944-ACA1-4E4F-8EC8-8F7097E32E6F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{708FD1C7-A878-4569-BB70-49607D26DAFB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForumApp.Services", "Services\ForumApp.Services\ForumApp.Services.csproj", "{ABD747A9-B1B8-4056-9E1B-32D535880D5D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +43,10 @@ Global
 		{AC90A944-ACA1-4E4F-8EC8-8F7097E32E6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC90A944-ACA1-4E4F-8EC8-8F7097E32E6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC90A944-ACA1-4E4F-8EC8-8F7097E32E6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABD747A9-B1B8-4056-9E1B-32D535880D5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABD747A9-B1B8-4056-9E1B-32D535880D5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABD747A9-B1B8-4056-9E1B-32D535880D5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABD747A9-B1B8-4056-9E1B-32D535880D5D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,5 +56,6 @@ Global
 		{CCA01A82-D1DB-46C2-A891-CA9AF34CD4EA} = {F2A358ED-3997-48C0-A107-E47760A71FA4}
 		{65D494F0-5DE1-4FCB-91B3-60FF1117D7BD} = {F38024C1-60BC-477E-A8B7-25783B92420C}
 		{AC90A944-ACA1-4E4F-8EC8-8F7097E32E6F} = {F38024C1-60BC-477E-A8B7-25783B92420C}
+		{ABD747A9-B1B8-4056-9E1B-32D535880D5D} = {708FD1C7-A878-4569-BB70-49607D26DAFB}
 	EndGlobalSection
 EndGlobal
