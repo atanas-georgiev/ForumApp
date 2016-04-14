@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{F38024C1-60BC-477E-A8B7-25783B92420C}"
 EndProject
@@ -20,6 +20,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{708FD1C7-A878-4569-BB70-49607D26DAFB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForumApp.Services", "Services\ForumApp.Services\ForumApp.Services.csproj", "{ABD747A9-B1B8-4056-9E1B-32D535880D5D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{41E7B373-E0CB-43F6-9C02-0D97FF873B9F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForumApp.Constants", "ForumApp.Constants\ForumApp.Constants.csproj", "{FC8D75C6-85E1-4A82-898D-F78AF1F2FB9C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +51,10 @@ Global
 		{ABD747A9-B1B8-4056-9E1B-32D535880D5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ABD747A9-B1B8-4056-9E1B-32D535880D5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ABD747A9-B1B8-4056-9E1B-32D535880D5D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC8D75C6-85E1-4A82-898D-F78AF1F2FB9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC8D75C6-85E1-4A82-898D-F78AF1F2FB9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC8D75C6-85E1-4A82-898D-F78AF1F2FB9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC8D75C6-85E1-4A82-898D-F78AF1F2FB9C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -57,5 +65,6 @@ Global
 		{65D494F0-5DE1-4FCB-91B3-60FF1117D7BD} = {F38024C1-60BC-477E-A8B7-25783B92420C}
 		{AC90A944-ACA1-4E4F-8EC8-8F7097E32E6F} = {F38024C1-60BC-477E-A8B7-25783B92420C}
 		{ABD747A9-B1B8-4056-9E1B-32D535880D5D} = {708FD1C7-A878-4569-BB70-49607D26DAFB}
+		{FC8D75C6-85E1-4A82-898D-F78AF1F2FB9C} = {41E7B373-E0CB-43F6-9C02-0D97FF873B9F}
 	EndGlobalSection
 EndGlobal

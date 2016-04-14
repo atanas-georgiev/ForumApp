@@ -1,9 +1,9 @@
-﻿using System;
-using System.Data.Entity;
-using System.Linq;
-
-namespace ForumApp.Data.Repositories
+﻿namespace ForumApp.Data.Repositories
 {
+    using System;
+    using System.Data.Entity;
+    using System.Linq;
+
     public class GenericRepository<T> : IRepository<T> where T : class
     {
         public GenericRepository(IForumAppDbContext context)

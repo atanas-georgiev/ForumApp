@@ -1,9 +1,9 @@
-﻿using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using ForumApp.Data.Models;
-
-namespace ForumApp.Data
+﻿namespace ForumApp.Data
 {
+    using System.Data.Entity;
+    using System.Data.Entity.Infrastructure;
+    using ForumApp.Data.Models;
+
     public interface IForumAppDbContext
     {
         IDbSet<Forum> Forums { get; set; }

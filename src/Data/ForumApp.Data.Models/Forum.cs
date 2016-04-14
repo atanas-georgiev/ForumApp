@@ -15,6 +15,7 @@
         [Key]
         public int Id { get; set; }
 
+        [Required]
         [MinLength(5)]
         [MaxLength(150)]
         public string Title { get; set; }

@@ -1,14 +1,39 @@
 ﻿namespace ForumApp.Mvc.Models.Forum
 {
-    using System.ComponentModel.DataAnnotations;
+    using System.Collections.Generic;
 
-    using ForumApp.Data.Models;
-    using ForumApp.Mvc.Infrastructure.Mappings;
-
-    public class ForumListViewModel : IMapFrom<Forum>
+    public class ForumListViewModel
     {
-        [MinLength(5)]
-        [MaxLength(150)]
-        public string Title { get; set; }
+        public int Page { get; set; }
+
+        public int Pages { get; set; }
+
+        public IEnumerable<ForumViewModel> Forums { get; set; }
+
+        public int NextPage
+        {
+            get
+            {
+                if (this.Page >= this.Pages)
+                {
+                    return 1;
+                }
+
+                return this.Page + 1;
+            }
+        }
+
+        public int PreviousPage
+        {
+            get
+            {
+                if (this.Page <= 1)
+                {
+                    return this.Pages;
+                }
+
+                return this.Page - 1;
+            }
+        }
     }
 }

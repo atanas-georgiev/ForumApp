@@ -1,10 +1,36 @@
-﻿@model IEnumerable<ForumApp.Mvc.Models.Forum.ForumListViewModel>
+﻿@using ForumApp.Mvc.Models.Forum
+@model ForumListViewModel
 
-<ul>
-    @foreach (var forum in @Model)
+<br/>
+
+<div class="row">
+    @foreach (var forum in @Model.Forums)
     {
-        <li>
-            @forum.Title
-        </li>
+    <div class="well">
+        @forum.NumberPosts -> @forum.Title
+    </div>
     }
-</ul>
+</div>
+
+@if (Model.Pages > 0)
+{
+    <!--Pagination-->
+    <div class="text-center">
+        <ul class="pagination">
+            <li><a href="?page=@Model.PreviousPage"><i class="fa fa-backward"></i></a></li>
+            @for (int i = 1; i <= Model.Pages; i++)
+            {
+                if (i == Model.Page)
+                {
+            <li class="active"><a href="/Videos/?page=@i">@i</a></li>
+                }
+                else
+                {
+            <li><a href="?page=@i">@i</a></li>
+                }
+            }
+            <li><a href="?page=@Model.NextPage"><i class="fa fa-forward"></i></a></li>
+        </ul>
+    </div>
+    <!--End Pagination-->
+}

@@ -1,8 +1,8 @@
-﻿using System;
-using System.Linq;
-
-namespace ForumApp.Data.Repositories
+﻿namespace ForumApp.Data.Repositories
 {
+    using System;
+    using System.Linq;
+
     public interface IRepository<T> : IDisposable where T : class
     {
         IQueryable<T> All();

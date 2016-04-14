@@ -15,24 +15,31 @@
             this.forumService = forumService;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(int page = 1)
         {
-            var forums = this.forumService.GetAll().To<ForumListViewModel>();
-            return View(forums);
+            var forums = this.forumService.GetByPage(page).To<ForumViewModel>();
+            var model = new ForumListViewModel()
+            {
+                Forums = forums,
+                Pages = this.forumService.GetAllPagesCount(),
+                Page = page
+            };
+
+            return this.View(model);
         }
 
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
 
-            return View();
+            return this.View();
         }
 
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
 
-            return View();
+            return this.View();
         }
     }
 }

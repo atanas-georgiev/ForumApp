@@ -6,8 +6,8 @@ namespace ForumApp.Data.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
-            AutomaticMigrationDataLossAllowed = true; // todo: remove in production
+            this.AutomaticMigrationsEnabled = true;
+            this.AutomaticMigrationDataLossAllowed = true; // todo: remove in production
         }
 
         protected override void Seed(ForumApp.Data.ForumAppDbContext context)
