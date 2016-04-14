@@ -1,43 +1,20 @@
-﻿@using ForumApp.Mvc.Models.Forum
-@model ForumListViewModel
+﻿@using ForumApp.Mvc.Models.Shared
+@using ForumApp.Mvc.Models.Post
+@model PagableListViewModel<PostViewModel>
 
-<br/>
-
-@if (Model.Pages > 0)
-{
-    <div class="text-center">
-        <ul class="pagination">
-            @if (@Model.Page != 1)
-            {
-                <li>@Html.ActionLink("<", "Index", new {id = @Model.PreviousPage})</li>
-            }
-
-            @for (int i = 1; i <= Model.Pages; i++)
-            {
-                if (i == Model.Page)
-                {
-                    <li class="active">@Html.ActionLink(i.ToString(), "Index", new {id = i})</li>
-                }
-                else
-                {
-                    <li>@Html.ActionLink(i.ToString(), "Index", new {id = i})</li>
-                }
-            }
-
-            @if (@Model.Page != @Model.Pages)
-            {
-                <li>@Html.ActionLink(">", "Index", new { id = @Model.NextPage })</li>
-            }
-            
-        </ul>
-    </div>
+@{
+    ViewBag.Title = "title";    
 }
 
+<br />
+
+@Html.Partial("_Pagable", @Model);
+
 <div class="row">
-    @foreach (var forum in @Model.Forums)
+    @foreach (var post in @Model.Data)
     {
     <div class="well">
-        @forum.NumberPosts -> @forum.Title
+        @post.NumberComments -> @Html.ActionLink(@post.Text, "Index", "Forum", new { Id = post.Id }, new object { })
     </div>
     }
 </div>

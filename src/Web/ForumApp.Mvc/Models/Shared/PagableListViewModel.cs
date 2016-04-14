@@ -1,14 +1,14 @@
-﻿namespace ForumApp.Mvc.Models.Forum
+﻿namespace ForumApp.Mvc.Models.Shared
 {
     using System.Collections.Generic;
 
-    public class ForumListViewModel
+    public class PagableListViewModel<T>
     {
         public int Page { get; set; }
 
         public int Pages { get; set; }
 
-        public IEnumerable<ForumViewModel> Forums { get; set; }
+        public IEnumerable<T> Data { get; set; }
 
         public int NextPage
         {

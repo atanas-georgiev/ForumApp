@@ -8,7 +8,7 @@
 
     public class ForumService : IForumService
     {
-        private IRepository<Forum> forums;
+        private readonly IRepository<Forum> forums;
 
         public ForumService(IRepository<Forum> forums)
         {

@@ -1,5 +1,6 @@
 ﻿namespace ForumApp.Data.Models
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
@@ -25,6 +26,9 @@
         [DefaultValue("anonymous")]
         [MaxLength(150)]
         public string Author { get; set; }
+
+        [Required]
+        public DateTime CreatedDateTime { get; set; }
 
         [ForeignKey("ForumId")]
         public virtual Forum Forum { get; set; }

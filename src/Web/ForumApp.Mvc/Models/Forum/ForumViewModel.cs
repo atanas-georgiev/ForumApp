@@ -8,6 +8,8 @@
 
     public class ForumViewModel : IMapFrom<Forum>, IHaveCustomMappings
     {
+        public int Id { get; set; }
+
         [MinLength(5)]
         [MaxLength(150)]
         public string Title { get; set; }

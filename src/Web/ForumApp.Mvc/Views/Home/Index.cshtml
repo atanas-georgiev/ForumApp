@@ -1,0 +1,20 @@
+﻿@using ForumApp.Mvc.Models.Shared
+@using ForumApp.Mvc.Models.Forum
+@model PagableListViewModel<ForumViewModel>
+
+@{
+    ViewBag.Title = "title";
+}
+
+<br/>
+
+@Html.Partial("_Pagable", @Model);
+
+<div class="row">
+    @foreach (var forum in @Model.Data)
+    {
+        <div class="well">
+            @forum.NumberPosts -> @Html.ActionLink(@forum.Title, "Index", "Forum", new { Id = forum.Id }, new object { })
+        </div>
+    }
+</div>
