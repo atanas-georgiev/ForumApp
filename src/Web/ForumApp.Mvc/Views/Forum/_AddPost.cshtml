@@ -1,0 +1,33 @@
+﻿@model ForumApp.Mvc.Models.Forum.AddPostViewModel
+
+@using (Ajax.BeginForm("AddPost", null,
+                                        new AjaxOptions
+                                        {
+                                            UpdateTargetId = "results",
+                                            InsertionMode = InsertionMode.Replace,
+                                            HttpMethod = "POST",
+                                            OnSuccess = "reload()"
+                                        }, new { id = "searchForm" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(false, string.Empty, new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Author, htmlAttributes: new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @(Html.EditorFor(model => model.Author))
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Text, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @(Html.EditorFor(model => model.Text))
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <input type="submit" value="Add" class="k-button" />
+        </div>
+    </div>
+}

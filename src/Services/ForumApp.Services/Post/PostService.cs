@@ -32,5 +32,11 @@
         {
             return (int)Math.Ceiling(this.posts.All().Count(x => x.ForumId == forumId) / (decimal)Constants.Page.ItemsPerPage);
         }
+
+        public void Add(Post post)
+        {
+            this.posts.Add(post);
+            this.posts.SaveChanges();
+        }
     }
 }

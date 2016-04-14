@@ -151,6 +151,7 @@
     <Compile Include="Infrastructure\Mappings\IMapFrom.cs" />
     <Compile Include="Infrastructure\Mappings\IMapTo.cs" />
     <Compile Include="Infrastructure\Mappings\QueryableExtensions.cs" />
+    <Compile Include="Models\Forum\AddPostViewModel.cs" />
     <Compile Include="Models\Forum\ForumViewModel.cs" />
     <Compile Include="Models\Post\PostViewModel.cs" />
     <Compile Include="Models\Shared\PagableListViewModel.cs" />
@@ -179,6 +180,8 @@
     <Content Include="Scripts\jquery-2.2.3.js" />
     <Content Include="Scripts\jquery-2.2.3.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -205,6 +208,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <None Include="Views\Forum\Index.cshtml" />
     <Content Include="Views\Shared\_Pagable.cshtml" />
+    <Content Include="Views\Forum\_AddPost.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

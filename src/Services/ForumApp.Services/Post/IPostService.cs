@@ -11,5 +11,7 @@
         IQueryable<Post> GetForumPostsOrderedByDate(int forumId, int page);
 
         int GetForumPostsAllPagesCount(int forumId);
+
+        void Add(Post post);
     }
 }

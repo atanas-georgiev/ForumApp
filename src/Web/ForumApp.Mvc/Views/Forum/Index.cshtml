@@ -3,12 +3,12 @@
 @model PagableListViewModel<PostViewModel>
 
 @{
-    ViewBag.Title = "title";    
+    ViewBag.Title = "title";
 }
 
 <br />
 
-@Html.Partial("_Pagable", @Model);
+@Html.Partial("_Pagable", @Model)
 
 <div class="row">
     @foreach (var post in @Model.Data)
@@ -18,3 +18,24 @@
     </div>
     }
 </div>
+
+<div class="show-hide-section">
+    <div id="loading" style="display: none">Loading data...</div>
+    <div id="results"></div>
+    @Ajax.ActionLink("AddPost", "AddPost", null, new AjaxOptions
+    {
+        UpdateTargetId = "results",
+        LoadingElementId = "loading",
+        InsertionMode = InsertionMode.Replace,
+    }, new { @class = "btn btn-primary show-hide-btn" })    
+</div>
+
+<script>
+    $(".show-hide-btn").click(function () {
+        $(".show-hide-btn").hide();
+    });
+
+    function reload() {
+        window.location.reload();
+    }
+</script>
