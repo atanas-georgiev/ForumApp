@@ -6,23 +6,30 @@
     using ForumApp.Mvc.Models.Forum;
     using ForumApp.Services.Forum;
 
-    public class HomeController : Controller
+    public class ForumController : Controller
     {
         private readonly IForumService forumService;
 
-        public HomeController(IForumService forumService)
+        public ForumController(IForumService forumService)
         {
             this.forumService = forumService;
         }
 
-        public ActionResult Index(int page = 1)
+        public ActionResult Index(int id = 1)
         {
-            var forums = this.forumService.GetByPage(page).To<ForumViewModel>();
+            var allPages = this.forumService.GetAllPagesCount();
+
+            if (id > allPages)
+            {
+                return this.HttpNotFound();
+            }
+
+            var forums = this.forumService.GetByPage(id).To<ForumViewModel>();
             var model = new ForumListViewModel()
             {
                 Forums = forums,
-                Pages = this.forumService.GetAllPagesCount(),
-                Page = page
+                Pages = allPages,
+                Page = id
             };
 
             return this.View(model);
@@ -31,13 +38,6 @@
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
-
-            return this.View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
 
             return this.View();
         }

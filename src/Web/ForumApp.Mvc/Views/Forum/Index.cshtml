@@ -1,0 +1,43 @@
+﻿@using ForumApp.Mvc.Models.Forum
+@model ForumListViewModel
+
+<br/>
+
+@if (Model.Pages > 0)
+{
+    <div class="text-center">
+        <ul class="pagination">
+            @if (@Model.Page != 1)
+            {
+                <li>@Html.ActionLink("<", "Index", new {id = @Model.PreviousPage})</li>
+            }
+
+            @for (int i = 1; i <= Model.Pages; i++)
+            {
+                if (i == Model.Page)
+                {
+                    <li class="active">@Html.ActionLink(i.ToString(), "Index", new {id = i})</li>
+                }
+                else
+                {
+                    <li>@Html.ActionLink(i.ToString(), "Index", new {id = i})</li>
+                }
+            }
+
+            @if (@Model.Page != @Model.Pages)
+            {
+                <li>@Html.ActionLink(">", "Index", new { id = @Model.NextPage })</li>
+            }
+            
+        </ul>
+    </div>
+}
+
+<div class="row">
+    @foreach (var forum in @Model.Forums)
+    {
+    <div class="well">
+        @forum.NumberPosts -> @forum.Title
+    </div>
+    }
+</div>
