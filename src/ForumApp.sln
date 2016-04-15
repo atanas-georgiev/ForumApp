@@ -23,7 +23,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForumApp.Services", "Servic
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{41E7B373-E0CB-43F6-9C02-0D97FF873B9F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForumApp.Constants", "ForumApp.Constants\ForumApp.Constants.csproj", "{FC8D75C6-85E1-4A82-898D-F78AF1F2FB9C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForumApp.Constants", "Common\ForumApp.Constants\ForumApp.Constants.csproj", "{FC8D75C6-85E1-4A82-898D-F78AF1F2FB9C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
