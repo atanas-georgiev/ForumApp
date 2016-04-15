@@ -1,8 +1,7 @@
-﻿using System.Collections;
-
-namespace ForumApp.Services.Cache
+﻿namespace ForumApp.Services.Cache
 {
     using System;
+    using System.Collections;
     using System.Web;
     using System.Web.Caching;
 

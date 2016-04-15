@@ -10,6 +10,8 @@
 
         public int ParentId { get; set; }
 
+        public string Title { get; set; }
+
         public IEnumerable<T> Data { get; set; }
 
         public int NextPage

@@ -1,5 +1,7 @@
 ﻿namespace ForumApp.Data.Models
 {
+    using System;
+
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
@@ -17,6 +19,9 @@
         [DefaultValue("anonymous")]
         [MaxLength(150)]
         public string Author { get; set; }
+
+        [Required]
+        public DateTime CreatedDateTime { get; set; }
 
         [ForeignKey("PostId")]
         public virtual Post Post { get; set; }

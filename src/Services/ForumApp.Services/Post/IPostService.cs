@@ -10,6 +10,8 @@
 
         int GetForumPostsAllPagesCount(int forumId);
 
+        string GetTitleById(int id);
+
         void Add(Post post);
     }
 }

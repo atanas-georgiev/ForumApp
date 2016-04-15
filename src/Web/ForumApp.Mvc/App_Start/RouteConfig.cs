@@ -19,6 +19,9 @@
                     id = UrlParameter.Optional,
                     page = UrlParameter.Optional
                 });
+
+            // Show a 404 error page for anything else.
+            routes.MapRoute("Error", "{*url}", new { controller = "Error", action = "NotFound" });
         }
     }
 }

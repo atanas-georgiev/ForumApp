@@ -1,38 +1,35 @@
 ﻿namespace ForumApp.Mvc.Controllers
 {
     using System;
-    using System.Web;
     using System.Web.Mvc;
     using ForumApp.Data.Models;
     using ForumApp.Mvc.Infrastructure.Mappings;
     using ForumApp.Mvc.Models.Forum;
     using ForumApp.Mvc.Models.Post;
     using ForumApp.Mvc.Models.Shared;
-    using ForumApp.Services.Cache;
     using ForumApp.Services.Forum;
     using ForumApp.Services.Post;
     
     public class ForumController : Controller
     {
-        private readonly IForumService forumService;
         private readonly IPostService postService;
-        private readonly ICacheService cacheService;
+        private readonly IForumService forumService;
 
-        public ForumController(IForumService forumService, IPostService postService, ICacheService cacheService)
+        public ForumController(IPostService postService, IForumService forumService)
         {
             this.postService = postService;
             this.forumService = forumService;
-            this.cacheService = cacheService;
         }
 
         public ActionResult Index(int page = 1, int id = 1)
         {
             var allPages = this.postService.GetForumPostsAllPagesCount(id);
-            var posts = this.postService.GetForumPostsOrderedByDate(id, page).To<PostViewModel>();            
+            var posts = this.postService.GetForumPostsOrderedByDate(id, page).To<PostViewModel>();
+            var title = this.forumService.GetTitleById(id);
 
             this.Session["forumId"] = id;
 
-            if (page > allPages)
+            if ((page > allPages && allPages != 0) || title == string.Empty)
             {
                 return this.HttpNotFound();
             }
@@ -42,7 +39,8 @@
                 Data = posts,
                 Pages = allPages,
                 Page = page,
-                ParentId = id
+                ParentId = id,
+                Title = title
             };
 
             return this.View(model);

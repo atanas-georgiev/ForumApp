@@ -44,6 +44,8 @@
   <ItemGroup>
     <Compile Include="Cache\CacheService.cs" />
     <Compile Include="Cache\ICacheService.cs" />
+    <Compile Include="Comment\ICommentService.cs" />
+    <Compile Include="Comment\CommentService.cs" />
     <Compile Include="Forum\ForumService.cs" />
     <Compile Include="Forum\IForumService.cs" />
     <Compile Include="Post\PostService.cs" />

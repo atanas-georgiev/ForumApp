@@ -20,7 +20,9 @@
         
         public IQueryable<Post> GetForumPostsOrderedByDate(int forumId, int page)
         {
-            return this.cacheService.Get("AllPostsCache" + forumId + "_" + page, () =>
+            return this.cacheService.Get(
+            "AllPostsCache" + forumId + "_" + page, 
+            () =>
             {
                 return this.posts.All()
                     .Where(x => x.ForumId == forumId)
@@ -28,12 +30,25 @@
                     .Skip(Constants.Page.ItemsPerPage * (page - 1))
                     .Take(Constants.Page.ItemsPerPage)
                     .ToList().AsQueryable();
-            }, 15 * 60);
+            }, 
+            ForumApp.Constants.Cache.Timeout);
         }
 
         public int GetForumPostsAllPagesCount(int forumId)
         {
-            return this.cacheService.Get("AllPostsCacheCount" + forumId, () => (int)Math.Ceiling(this.posts.All().Count(x => x.ForumId == forumId) / (decimal) Constants.Page.ItemsPerPage), 15 * 60);            
+            return this.cacheService.Get("AllPostsCacheCount" + forumId, () => (int)Math.Ceiling(this.posts.All().Count(x => x.ForumId == forumId) / (decimal)Constants.Page.ItemsPerPage), ForumApp.Constants.Cache.Timeout);
+        }
+
+        public string GetTitleById(int id)
+        {
+            return this.cacheService.Get(
+                "PostTitle" + id,
+                () =>
+                {
+                    var title = this.posts.All().FirstOrDefault(x => x.Id == id);
+                    return title != null ? title.Text : string.Empty;
+                },
+                ForumApp.Constants.Cache.Timeout);
         }
 
         public void Add(Post post)

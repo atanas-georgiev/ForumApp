@@ -1,6 +1,4 @@
-﻿using ForumApp.Services.Cache;
-
-namespace ForumApp.Mvc.Controllers
+﻿namespace ForumApp.Mvc.Controllers
 {
     using System.Web.Mvc;
 
@@ -12,16 +10,13 @@ namespace ForumApp.Mvc.Controllers
     public class HomeController : Controller
     {
         private readonly IForumService forumService;
-        private readonly ICacheService cacheService;
 
-        public HomeController(IForumService forumService, ICacheService cacheService)
+        public HomeController(IForumService forumService)
         {
             this.forumService = forumService;
-            this.cacheService = cacheService;
         }
 
-        [OutputCache(Duration=10, VaryByParam="none")]
-        public ActionResult Index(int page = 1)
+        public ActionResult Index(int page = 1, int id = 0)
         {
             var allPages = this.forumService.GetAllPagesCount();
             var forums = this.forumService.GetByPage(page).To<ForumViewModel>();

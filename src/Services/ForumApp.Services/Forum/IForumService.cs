@@ -8,6 +8,8 @@
     {
         IQueryable<Forum> GetByPage(int page);
 
+        string GetTitleById(int id);
+
         int GetAllPagesCount();
     }
 }

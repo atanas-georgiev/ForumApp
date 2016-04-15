@@ -1,9 +1,9 @@
-﻿using System;
-using ForumApp.Services.Cache;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace ForumApp.Tests
+﻿namespace ForumApp.Tests
 {
+    using System;
+    using ForumApp.Services.Cache;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     [TestClass]
     public class UnitTest1
     {
