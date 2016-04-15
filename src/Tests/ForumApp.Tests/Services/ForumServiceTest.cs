@@ -1,8 +1,8 @@
-﻿using System.Linq;
-
-namespace ForumApp.Tests.Services
+﻿namespace ForumApp.Tests.Services
 {
     using System;
+    using System.Linq;
+
     using ForumApp.Data.Models;
     using ForumApp.Services.Forum;
     using ForumApp.Tests.Services.Mocks;
@@ -11,33 +11,33 @@ namespace ForumApp.Tests.Services
     [TestClass]
     public class ForumServiceTest
     {
+        private const int DataCount = 100;
+
         private ForumService forumService;
         private RepositoryMock<Forum> repo;
-
-        private const int DATA_COUNT = 100;
-
+        
         [TestInitialize]
         public void Init()
         {
-            repo = new RepositoryMock<Forum>();
+            this.repo = new RepositoryMock<Forum>();
 
-            for (int i = 0; i < DATA_COUNT; i++)
+            for (int i = 0; i < DataCount; i++)
             {
-                repo.Add(new Forum()
+                this.repo.Add(new Forum()
                 {
                     Id = i,
                     Title = "Title" + i
                 });
             }
 
-            this.forumService = new ForumService(repo, new CacheServiceMock());
+            this.forumService = new ForumService(this.repo, new CacheServiceMock());
         }
 
         [TestMethod]
         public void GetAllPagesCountShouldReturnCorrectValue()
         {
             var count = this.forumService.GetAllPagesCount();
-            Assert.AreEqual(count, (int)Math.Ceiling(DATA_COUNT / (decimal)Constants.Page.ItemsPerPage));
+            Assert.AreEqual(count, (int)Math.Ceiling(DataCount / (decimal)Constants.Page.ItemsPerPage));
         }
 
         [TestMethod]
@@ -50,7 +50,7 @@ namespace ForumApp.Tests.Services
         [TestMethod]
         public void GetTitleByIdShouldReturnCorrectValueWithInvalidParameters()
         {
-            var title = this.forumService.GetTitleById(DATA_COUNT + 1);
+            var title = this.forumService.GetTitleById(DataCount + 1);
             Assert.AreEqual(title, string.Empty);
         }
 

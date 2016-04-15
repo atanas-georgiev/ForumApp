@@ -58,6 +58,9 @@
     <Compile Include="Services\Mocks\CacheServiceMock.cs" />
     <Compile Include="Services\Mocks\RepositoryMock.cs" />
     <Compile Include="Services\ForumServiceTest.cs" />
+    <Compile Include="Services\PostServiceTest.cs" />
+    <Compile Include="Services\CommentServiceTest.cs" />
+    <Compile Include="Services\CacheServiceTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
