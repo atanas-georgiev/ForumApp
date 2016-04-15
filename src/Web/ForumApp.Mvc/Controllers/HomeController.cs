@@ -1,4 +1,6 @@
-﻿namespace ForumApp.Mvc.Controllers
+﻿using ForumApp.Services.Cache;
+
+namespace ForumApp.Mvc.Controllers
 {
     using System.Web.Mvc;
 
@@ -10,27 +12,31 @@
     public class HomeController : Controller
     {
         private readonly IForumService forumService;
+        private readonly ICacheService cacheService;
 
-        public HomeController(IForumService forumService)
+        public HomeController(IForumService forumService, ICacheService cacheService)
         {
             this.forumService = forumService;
+            this.cacheService = cacheService;
         }
 
-        public ActionResult Index(int id = 1)
+        [OutputCache(Duration=10, VaryByParam="none")]
+        public ActionResult Index(int page = 1)
         {
             var allPages = this.forumService.GetAllPagesCount();
-
-            if (id > allPages)
+            var forums = this.forumService.GetByPage(page).To<ForumViewModel>();
+            
+            if (page > allPages)
             {
                 return this.HttpNotFound();
             }
-
-            var forums = this.forumService.GetByPage(id).To<ForumViewModel>();
+            
             var model = new PagableListViewModel<ForumViewModel>()
             {
                 Data = forums,
                 Pages = allPages,
-                Page = id
+                Page = page,
+                ParentId = 0
             };
 
             return this.View(model);

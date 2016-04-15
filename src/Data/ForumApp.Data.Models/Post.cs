@@ -33,7 +33,7 @@
         [ForeignKey("ForumId")]
         public virtual Forum Forum { get; set; }
 
-        public int? ForumId { get; set; }
+        public virtual int? ForumId { get; set; }
 
         public virtual ICollection<Comment> Comments
         {

@@ -3,18 +3,35 @@
 @model PagableListViewModel<ForumViewModel>
 
 @{
-    ViewBag.Title = "title";
+    ViewBag.Title = "Forums";
 }
 
 <br/>
 
-@Html.Partial("_Pagable", @Model)
-
 <div class="row">
-    @foreach (var forum in @Model.Data)
-    {
-        <div class="well">
-            @forum.NumberPosts -> @Html.ActionLink(@forum.Title, "Index", "Forum", new { Id = forum.Id }, new object { })
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h2 class="panel-title">Forums</h2>
         </div>
-    }
+        <div class="panel-body">
+            <table class="table table-striped table-hover ">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Posts</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var forum in @Model.Data)
+            {
+                <tr>
+                    <td>@Html.ActionLink(@forum.Title, "Index", "Forum", new { page = 1, id = forum.Id }, new object { })</td>
+                    <td class="small-col">@forum.NumberPosts</td>
+                </tr>
+                    }
+                </tbody>
+            </table>
+            @Html.Partial("_Pagable", @Model)
+        </div>
+    </div>
 </div>

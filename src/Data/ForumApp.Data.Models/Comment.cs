@@ -21,6 +21,6 @@
         [ForeignKey("PostId")]
         public virtual Post Post { get; set; }
 
-        public int? PostId { get; set; }
+        public virtual int? PostId { get; set; }
     }
 }

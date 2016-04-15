@@ -8,6 +8,8 @@
 
         public int Pages { get; set; }
 
+        public int ParentId { get; set; }
+
         public IEnumerable<T> Data { get; set; }
 
         public int NextPage

@@ -6,36 +6,65 @@
     ViewBag.Title = "title";
 }
 
-<br />
-
-@Html.Partial("_Pagable", @Model)
+<br/>
 
 <div class="row">
-    @foreach (var post in @Model.Data)
-    {
-    <div class="well">
-        @post.NumberComments -> @Html.ActionLink(@post.Text, "Index", "Forum", new { Id = post.Id }, new object { })
+    <div class="show-hide-section">
+        <div id="loading" style="display: none">Loading data...</div>
+        <div id="results"></div>
+        @Ajax.ActionLink("AddPost", "AddPost", null, new AjaxOptions
+        {
+            UpdateTargetId = "results",
+            LoadingElementId = "loading",
+            InsertionMode = InsertionMode.Replace,
+        }, new {@class = "btn btn-primary show-hide-btn"})
     </div>
-    }
 </div>
 
-<div class="show-hide-section">
-    <div id="loading" style="display: none">Loading data...</div>
-    <div id="results"></div>
-    @Ajax.ActionLink("AddPost", "AddPost", null, new AjaxOptions
-    {
-        UpdateTargetId = "results",
-        LoadingElementId = "loading",
-        InsertionMode = InsertionMode.Replace,
-    }, new { @class = "btn btn-primary show-hide-btn" })    
+<br />
+
+<div class="row">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h2 class="panel-title">Posts</h2>
+
+        </div>
+        <div class="panel-body">
+            <table class="table table-striped table-hover ">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Created</th>
+                        <th>Posts</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var post in @Model.Data)
+                    {
+                        <tr>
+                            <td>@Html.ActionLink(@post.Text, "Index", "Forum", new {Id = post.Id}, new object {})</td>
+                            <td class="middle-col">@post.Author</td>
+                            <td class="middle-col">@post.CreatedDateTime</td>
+                            <td class="small-col">@post.NumberComments</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            @Html.Partial("_Pagable", @Model)
+        </div>
+    </div>
 </div>
 
 <script>
+
     $(".show-hide-btn").click(function () {
         $(".show-hide-btn").hide();
     });
 
-    function reload() {
-        window.location.reload();
+    function UpdateSuccessful(data) {
+        if (data.indexOf("input-validation-error") <= -1) {
+            window.location.reload();
+        }
     }
 </script>

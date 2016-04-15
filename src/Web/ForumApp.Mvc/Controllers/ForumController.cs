@@ -1,12 +1,14 @@
 ﻿namespace ForumApp.Mvc.Controllers
 {
     using System;
+    using System.Web;
     using System.Web.Mvc;
     using ForumApp.Data.Models;
     using ForumApp.Mvc.Infrastructure.Mappings;
     using ForumApp.Mvc.Models.Forum;
     using ForumApp.Mvc.Models.Post;
     using ForumApp.Mvc.Models.Shared;
+    using ForumApp.Services.Cache;
     using ForumApp.Services.Forum;
     using ForumApp.Services.Post;
     
@@ -14,16 +16,20 @@
     {
         private readonly IForumService forumService;
         private readonly IPostService postService;
+        private readonly ICacheService cacheService;
 
-        public ForumController(IForumService forumService, IPostService postService)
+        public ForumController(IForumService forumService, IPostService postService, ICacheService cacheService)
         {
             this.postService = postService;
             this.forumService = forumService;
+            this.cacheService = cacheService;
         }
 
-        public ActionResult Index(int id = 1, int page = 1)
+        public ActionResult Index(int page = 1, int id = 1)
         {
             var allPages = this.postService.GetForumPostsAllPagesCount(id);
+            var posts = this.postService.GetForumPostsOrderedByDate(id, page).To<PostViewModel>();            
+
             this.Session["forumId"] = id;
 
             if (page > allPages)
@@ -31,12 +37,12 @@
                 return this.HttpNotFound();
             }
 
-            var posts = this.postService.GetForumPostsOrderedByDate(id, page).To<PostViewModel>();
             var model = new PagableListViewModel<PostViewModel>()
             {
                 Data = posts,
                 Pages = allPages,
-                Page = id
+                Page = page,
+                ParentId = id
             };
 
             return this.View(model);
@@ -64,7 +70,7 @@
                 };
 
                 this.postService.Add(postDb);
-                
+
                 return this.RedirectToAction("AddPost");
             }
 

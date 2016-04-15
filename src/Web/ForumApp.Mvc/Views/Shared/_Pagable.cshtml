@@ -7,26 +7,25 @@
         <ul class="pagination">
             @if (@Model.Page != 1)
             {
-            <li>@Html.ActionLink("<", "Index", new { id = @Model.PreviousPage })</li>
+                <li>@Html.ActionLink("<", "Index", new { id = @Model.ParentId, page = @Model.PreviousPage })</li>
             }
 
             @for (int i = 1; i <= Model.Pages; i++)
             {
                 if (i == Model.Page)
                 {
-            <li class="active">@Html.ActionLink(i.ToString(), "Index", new { id = i })</li>
+                    <li class="active">@Html.ActionLink(i.ToString(), "Index", new { id = @Model.ParentId, page = i })</li>
                 }
                 else
                 {
-            <li>@Html.ActionLink(i.ToString(), "Index", new { id = i })</li>
+                    <li>@Html.ActionLink(i.ToString(), "Index", new { id = @Model.ParentId, page = i })</li>
                 }
             }
 
             @if (@Model.Page != @Model.Pages)
             {
-            <li>@Html.ActionLink(">", "Index", new { id = @Model.NextPage })</li>
+            <li>@Html.ActionLink(">", "Index", new { id = @Model.ParentId, page = @Model.NextPage })</li>
             }
-
         </ul>
     </div>
 }
