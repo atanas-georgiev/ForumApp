@@ -1,6 +1,7 @@
-﻿namespace ForumApp.Tests.Services.Mocks
+﻿namespace ForumApp.Tests.Mocks
 {
     using System;
+
     using ForumApp.Services.Cache;
 
     public class CacheServiceMock : ICacheService

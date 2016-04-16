@@ -5,7 +5,7 @@
 
     using ForumApp.Data.Models;
     using ForumApp.Services.Comment;
-    using ForumApp.Tests.Services.Mocks;
+    using ForumApp.Tests.Mocks;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -15,25 +15,14 @@
         private const int DataCount = 100;
 
         private CommentService commentService;
+
         private RepositoryMock<Comment> repo;
 
-        [TestInitialize]
-        public void Init()
+        [TestMethod]
+        public void AddFuctionShouldAddSingleEntryInRepository()
         {
-            this.repo = new RepositoryMock<Comment>();
-
-            for (var i = 0; i < DataCount; i++)
-            {
-                this.repo.Add(new Comment()
-                {
-                    Id = i,
-                    Text = "Text" + i,
-                    CreatedDateTime = DateTime.UtcNow,
-                    PostId = 1
-                });
-            }
-
-            this.commentService = new CommentService(this.repo, new CacheServiceMock());
+            this.commentService.Add(new Comment());
+            Assert.AreEqual(this.repo.All().Count(), DataCount + 1);
         }
 
         [TestMethod]
@@ -55,11 +44,18 @@
             }
         }
 
-        [TestMethod]
-        public void AddFuctionShouldAddSingleEntryInRepository()
+        [TestInitialize]
+        public void Init()
         {
-            this.commentService.Add(new Comment());
-            Assert.AreEqual(this.repo.All().Count(), DataCount + 1);
+            this.repo = new RepositoryMock<Comment>();
+
+            for (var i = 0; i < DataCount; i++)
+            {
+                this.repo.Add(
+                    new Comment() { Id = i, Text = "Text" + i, CreatedDateTime = DateTime.UtcNow, PostId = 1 });
+            }
+
+            this.commentService = new CommentService(this.repo, new CacheServiceMock());
         }
     }
 }

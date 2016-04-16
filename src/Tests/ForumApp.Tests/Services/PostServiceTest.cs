@@ -5,7 +5,7 @@
 
     using ForumApp.Data.Models;
     using ForumApp.Services.Post;
-    using ForumApp.Tests.Services.Mocks;
+    using ForumApp.Tests.Mocks;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -15,25 +15,26 @@
         private const int DataCount = 100;
 
         private PostService postService;
+
         private RepositoryMock<Post> repo;
 
-        [TestInitialize]
-        public void Init()
+        [TestMethod]
+        public void AddFuctionShouldAddSingleEntryInRepository()
         {
-            this.repo = new RepositoryMock<Post>();
+            this.postService.Add(new Post());
+            Assert.AreEqual(this.repo.All().Count(), DataCount + 1);
+        }
 
-            for (var i = 0; i < DataCount; i++)
+        [TestMethod]
+        public void GetByPageShouldReturnCorrectValue()
+        {
+            var data = this.postService.GetForumPostsOrderedByDate(1, 1);
+            Assert.AreEqual(data.Count(), Constants.Page.ItemsPerPage);
+
+            for (int i = 0; i < Constants.Page.ItemsPerPage; i++)
             {
-                this.repo.Add(new Post()
-                {
-                    Id = i,
-                    Text = "Text" + i,
-                    CreatedDateTime = DateTime.UtcNow,
-                    ForumId = 1
-                });
+                Assert.AreEqual(data.ToList()[i].Text, "Text" + i);
             }
-
-            this.postService = new PostService(this.repo, new CacheServiceMock());
         }
 
         [TestMethod]
@@ -57,23 +58,17 @@
             Assert.AreEqual(title, string.Empty);
         }
 
-        [TestMethod]
-        public void GetByPageShouldReturnCorrectValue()
+        [TestInitialize]
+        public void Init()
         {
-            var data = this.postService.GetForumPostsOrderedByDate(1, 1);
-            Assert.AreEqual(data.Count(), Constants.Page.ItemsPerPage);
+            this.repo = new RepositoryMock<Post>();
 
-            for (int i = 0; i < Constants.Page.ItemsPerPage; i++)
+            for (var i = 0; i < DataCount; i++)
             {
-                Assert.AreEqual(data.ToList()[i].Text, "Text" + i);
+                this.repo.Add(new Post() { Id = i, Text = "Text" + i, CreatedDateTime = DateTime.UtcNow, ForumId = 1 });
             }
-        }
 
-        [TestMethod]
-        public void AddFuctionShouldAddSingleEntryInRepository()
-        {
-            this.postService.Add(new Post());
-            Assert.AreEqual(this.repo.All().Count(), DataCount + 1);
+            this.postService = new PostService(this.repo, new CacheServiceMock());
         }
     }
 }
