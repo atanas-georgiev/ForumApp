@@ -44,7 +44,7 @@
                         @foreach (var comment in @Model.Data)
                     {
                         <tr>
-                            <td>@comment.Text</td>
+                            <td>@Html.Raw(@comment.Text)</td>
                             <td class="middle-col">@comment.Author</td>
                             <td class="middle-col">@comment.CreatedDateTime</td>
                         </tr>

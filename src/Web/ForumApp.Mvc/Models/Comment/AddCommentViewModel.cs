@@ -2,6 +2,7 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
+    using System.Web.Mvc;
 
     using ForumApp.Mvc.Infrastructure.Mappings;
 
@@ -18,9 +19,11 @@
         [MinLength(5)]
         [MaxLength(1000)]
         [DataType(DataType.MultilineText)]
+        [AllowHtml]
         public string Text { get; set; }
         
         [MaxLength(150)]
+        [AllowHtml]
         public string Author { get; set; }
         
         public DateTime CreatedDateTime { get; set; }

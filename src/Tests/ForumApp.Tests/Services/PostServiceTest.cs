@@ -1,9 +1,11 @@
 ﻿namespace ForumApp.Tests.Services
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
 
     using ForumApp.Data.Models;
+    using ForumApp.Services.Cache;
     using ForumApp.Services.Post;
     using ForumApp.Tests.Mocks;
 
@@ -52,6 +54,40 @@
         }
 
         [TestMethod]
+        public void GetForumPostsShouldBeSortedByDateInAscendingOrder()
+        {
+            var data = this.postService.GetForumPostsOrderedByDate(1, 1).ToList();
+
+            for (int i = 0; i < Constants.Page.ItemsPerPage - 1; i++)
+            {
+                Assert.AreEqual(true, data[i].CreatedDateTime < data[i + 1].CreatedDateTime);
+            }            
+        }
+
+        [TestMethod]
+        public void GetForumPostsShouldCacheTheDataAndNotReadFromDbDirectly()
+        {
+            this.postService.GetForumPostsOrderedByDate(1, 1);
+            var countBefore = this.repo.ReadingsCount;
+            this.postService.GetForumPostsOrderedByDate(1, 1);
+            var countAfter = this.repo.ReadingsCount;
+
+            Assert.AreEqual(countAfter, countBefore);
+        }
+
+        [TestMethod]
+        public void GetForumPostsCacheShouldBeResetAfterNewPost()
+        {
+            this.postService.GetForumPostsOrderedByDate(1, 1);
+            var countBefore = this.repo.ReadingsCount;
+            this.postService.Add(new Post() { Text = string.Empty });
+            this.postService.GetForumPostsOrderedByDate(1, 1);
+            var countAfter = this.repo.ReadingsCount;
+
+            Assert.AreEqual(countAfter, countBefore + 1);
+        }
+
+        [TestMethod]
         public void GetTitleByIdShouldReturnCorrectValueWithInvalidParameters()
         {
             var title = this.postService.GetTitleById(DataCount + 1);
@@ -65,10 +101,10 @@
 
             for (var i = 0; i < DataCount; i++)
             {
-                this.repo.Add(new Post() { Id = i, Text = "Text" + i, CreatedDateTime = DateTime.UtcNow, ForumId = 1 });
+                this.repo.Add(new Post() { Id = i, Text = "Text" + i, CreatedDateTime = DateTime.UtcNow.AddDays(i), ForumId = 1 });
             }
 
-            this.postService = new PostService(this.repo, new CacheServiceMock());
+            this.postService = new PostService(this.repo, new CacheService());
         }
     }
 }

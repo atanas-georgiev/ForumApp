@@ -6,6 +6,8 @@
     using ForumApp.Data.Repositories;
     using ForumApp.Services.Cache;
 
+    using Ganss.XSS;
+
     public class CommentService : ICommentService
     {
         private readonly IRepository<Comment> comments;
@@ -43,8 +45,20 @@
 
         public void Add(Comment comment)
         {
-            this.cacheService.Remove("AllCommentsCache");
-            this.cacheService.Remove("AllCommentsCacheCount");
+            var sanitizer = new HtmlSanitizer();
+
+            if (comment.Text != null)
+            {              
+                comment.Text = sanitizer.Sanitize(comment.Text.Replace("\n", "<br />"));
+            }
+
+            if (comment.Author != null)
+            {
+                comment.Author = sanitizer.Sanitize(comment.Author.Replace("\n", "<br />"));
+            }
+
+            this.cacheService.Remove("AllCommentsCache" + comment.PostId);
+            this.cacheService.Remove("AllCommentsCacheCount" + comment.PostId);
             this.comments.Add(comment);
             this.comments.SaveChanges();
         }

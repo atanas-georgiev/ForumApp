@@ -44,12 +44,12 @@
                     <tbody>
                         @foreach (var post in @Model.Data)
                         {
-                        <tr>
-                            <td>@Html.ActionLink(@post.Text, "Index", "Post", new { page = 1, id = post.Id }, new object { })</td>
-                            <td class="middle-col">@post.Author</td>
-                            <td class="middle-col">@post.CreatedDateTime</td>
-                            <td class="small-col">@post.NumberComments</td>
-                        </tr>
+                            <tr>
+                                <td><a href="@Url.Action("Index", "Post", new { page = 1, id = post.Id })">@Html.Raw(@post.Text)</a></td>
+                                <td class="middle-col">@post.Author</td>
+                                <td class="middle-col">@post.CreatedDateTime</td>
+                                <td class="s-col">@post.NumberComments</td>
+                            </tr>
                         }
                     </tbody>
                 </table>

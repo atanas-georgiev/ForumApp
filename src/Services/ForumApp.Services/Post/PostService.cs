@@ -7,6 +7,8 @@
 
     using ForumApp.Services.Cache;
 
+    using Ganss.XSS;
+
     public class PostService : IPostService
     {
         private readonly IRepository<Post> posts;
@@ -53,8 +55,20 @@
 
         public void Add(Post post)
         {
-            this.cacheService.Remove("AllPostsCache");
-            this.cacheService.Remove("AllPostsCacheCount");
+            var sanitizer = new HtmlSanitizer();
+
+            if (post.Text != null)
+            {                
+                post.Text = sanitizer.Sanitize(post.Text.Replace("\n", "<br />"));
+            }
+
+            if (post.Author != null)
+            {
+                post.Author = sanitizer.Sanitize(post.Author.Replace("\n", "<br />"));
+            }
+
+            this.cacheService.Remove("AllPostsCache" + post.ForumId);
+            this.cacheService.Remove("AllPostsCacheCount" + post.ForumId);
             this.posts.Add(post);
             this.posts.SaveChanges();
         }

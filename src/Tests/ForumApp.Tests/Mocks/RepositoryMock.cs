@@ -13,7 +13,10 @@
         public RepositoryMock()
         {
             this.data = new List<T>();
+            this.ReadingsCount = 0;
         }
+
+        public int ReadingsCount { get; private set; }
 
         public void Add(T entity)
         {
@@ -22,6 +25,7 @@
 
         public IQueryable<T> All()
         {
+            this.ReadingsCount++;
             return this.data.AsQueryable();
         }
 
