@@ -5,7 +5,7 @@ Telerik Task Assignment
 [![Build status](https://ci.appveyor.com/api/projects/status/8dskbn908e27vevx?svg=true)](https://ci.appveyor.com/project/atanas-georgiev/forumapp)
 
 ####Demo link
-[forum.atanas.it](forum.atanas.it) - hosted with IIS 10 on Windows Server
+[http://forum.atanas.it](http://forum.atanas.it) - hosted with IIS 10 on Windows Server
 
 ##Description
 ForumApp is a simple web-based forum application supporting following functionality:
