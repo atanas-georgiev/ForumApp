@@ -31,8 +31,8 @@ ForumApp is a simple web-based forum application supporting following functional
 * Used automatic mapping between DbObjects and ViewModels(Automapper)
 * Implemented database models in ForumApp.Data.Models **(requirement 2.2)**
 * Used services for main functionality in Forums, Posts and Comments (ForumApp.Services)
-* Separated caching functionality in a service (ForumApp.Services.CacheService). 15 minutes cache used for posts and comments **(requirement 1.1)**. 
-* Invalidate the cache for the forum posts for the specified forum on new post **(requirement 3.1)** Verified by Unit Tests HomeIndexWithParamsShouldPointToCorrectRoute() and ForumIndexWithParamsShouldPointToCorrectRoute()
+* Separated caching functionality in a service (ForumApp.Services.CacheService). 15 minutes cache used for posts and comments **(requirement 1.1)**. Verified by Unit Test GetForumPostsShouldCacheTheDataAndNotReadFromDbDirectly()
+* Invalidate the cache for the forum posts for the specified forum on new post **(requirement 3.1)** Verified by Unit Tests GetForumPostsCacheShouldBeResetAfterNewPost()
 * Implemened adding new posts and comments using AJAX in the list page **(requirement 3)**. Input forms allow adding multiline text and HTML symbols (XSS secured by HTML sanitizer)
 * Unit tests **(requirement 4)**
   * Services unit tests (100% code coverage)
